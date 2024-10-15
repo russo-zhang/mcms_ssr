@@ -3,7 +3,11 @@
         <el-container>
             <el-header>
                 <ul class="menu_list">
-                    <li v-for="(item, index) in cateList" :key="index">
+                    <li
+                        v-for="(item, index) in cateList"
+                        :key="index"
+                        :class="{ active: item.code === commonStore.currentLang }"
+                    >
                         <nuxt-link :to="localePath(`/cate/${item.id}`)">{{
                             item[`name_${commonStore.currentLang}`]
                         }}</nuxt-link>
@@ -28,7 +32,16 @@
             <el-main>
                 <NuxtPage />
             </el-main>
-            <el-footer>Footer</el-footer>
+            <el-footer>
+                <div class="footer-content">
+                    <p>© 2024 Russo Zhang. All rights reserved.</p>
+                    <p>
+                        技术支持： <a href="https://cn.vuejs.org" target="_blank">Vue</a> |
+                        <a href="https://nuxt.com" target="_blank">Nuxt</a> |
+                        <a href="https://element-plus.org/zh-CN" target="_blank">Element Plus</a>
+                    </p>
+                </div>
+            </el-footer>
         </el-container>
     </div>
 </template>
@@ -44,13 +57,7 @@ const commonStore = useCommonStore();
 commonStore.setLang(route.path.split("/")[1] || "en");
 
 const localePath = useLocalePath();
-console.log("baseURL:", baseURL);
-const handleSelect = (key: string, keyPath: string[]) => {
-    console.log(key, keyPath);
-};
-const config = useRuntimeConfig();
 const cateList = ref<any>([]);
-
 const { data }: any = await useFetch(`/client/cate_list`, {
     baseURL,
     method: "post",
@@ -62,14 +69,13 @@ const selectLang = (lang: string) => {
     commonStore.currentLang = lang;
     setLocale(lang);
 };
-// onMounted(() => {
-// });
 </script>
 <style leng="less" scoped>
 .el-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 60px;
     padding: 10px 30px;
     background-color: #333;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -100,6 +106,36 @@ const selectLang = (lang: string) => {
     }
     .el-dropdown-link {
         cursor: pointer;
+    }
+}
+.el-main {
+    min-height: calc(100vh - 60px - 80px);
+}
+.el-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+
+    .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+
+        p {
+            margin: 5px 0;
+        }
+        a {
+            color: #1e90ff;
+            text-decoration: none;
+            margin: 0 5px;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
     }
 }
 </style>
