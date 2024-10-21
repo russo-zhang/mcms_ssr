@@ -6,7 +6,7 @@
                     <li
                         v-for="(item, index) in cateList"
                         :key="index"
-                        :class="{ active: item.code === commonStore.currentLang }"
+                        :class="{ active: item.id === commonStore.currentLang }"
                     >
                         <nuxt-link :to="localePath(`/cate/${item.id}`)">{{
                             item[`name_${commonStore.currentLang}`]
@@ -55,7 +55,6 @@ const route = useRoute();
 const router = useRouter();
 const commonStore = useCommonStore();
 commonStore.setLang(route.path.split("/")[1] || "en");
-
 const localePath = useLocalePath();
 const cateList = ref<any>([]);
 const { data }: any = await useFetch(`/client/cate_list`, {

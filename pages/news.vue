@@ -1,11 +1,11 @@
 <template>
-    <div class="cate">
+    <div class="news">
         <NuxtPage />
     </div>
 </template>
 <script lang="ts" setup></script>
 
 <style lang="less" scoped>
-.cate {
+.news {
 }
 </style>
