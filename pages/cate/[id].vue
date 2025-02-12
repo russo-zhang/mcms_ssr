@@ -41,16 +41,6 @@ const page = ref({
     total: 0,
 });
 const cid = Number(route.params.id) || 0;
-const { data }: any = await useFetch(`/client/news_list`, {
-    baseURL,
-    method: "post",
-    body: {
-        cid,
-        limit: page.value.pageSize,
-        skip: page.value.currentPage,
-    },
-});
-newsList.value = data.value.data;
 const getNewsList = async () => {
     const { data }: any = await useFetch(`/client/news_list`, {
         baseURL,
@@ -63,6 +53,7 @@ const getNewsList = async () => {
     });
     newsList.value = data.value.data;
 };
+getNewsList();
 const cateDetail = ref<any>({});
 const { data: cateData }: any = await useFetch(`/client/cate_detail`, {
     baseURL,

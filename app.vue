@@ -2,10 +2,13 @@
     <div>
         <el-container>
             <el-header>
+                <nuxt-link to="/" class="logo_wrap">
+                    <img src="@/assets/images/logo.png" alt="" />
+                </nuxt-link>
                 <ul class="menu_list">
                     <li
                         v-for="(item, index) in cateList"
-                        :key="index"
+                        :key="item.id"
                         :class="{ active: item.id === commonStore.currentLang }"
                     >
                         <nuxt-link :to="localePath(`/cate/${item.id}`)">{{
@@ -68,6 +71,13 @@ const selectLang = (lang: string) => {
     commonStore.currentLang = lang;
     setLocale(lang);
 };
+watch(
+    () => route,
+    (val) => {
+        console.log("val:", val);
+        commonStore.acitveCateId = val.split("/")[2];
+    }
+);
 </script>
 <style leng="less" scoped>
 .el-header {
@@ -78,6 +88,12 @@ const selectLang = (lang: string) => {
     padding: 10px 30px;
     background-color: #333;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    .logo_wrap {
+        img {
+            height: 40px;
+            border-radius: 8px;
+        }
+    }
     .menu_list {
         flex: 1;
         display: flex;

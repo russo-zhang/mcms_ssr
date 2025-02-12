@@ -9,6 +9,7 @@ export const useCommonStore = defineStore("common", {
     state: () => {
         return {
             currentLang: "en",
+            acitveCateId: 0,
             langList: [
                 {
                     code: "en",

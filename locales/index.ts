@@ -2,9 +2,11 @@ import { useCommonStore } from "@/stores/common";
 
 const messages = {
     sc: {
+        all_news: "全部新闻",
         empty_data: "暂无数据",
     },
     en: {
+        all_news: "All News",
         empty_data: "No data",
     },
 };
