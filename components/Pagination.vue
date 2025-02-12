@@ -55,6 +55,7 @@ const nextNotAllow = computed(() => {
 <style lang="less" scoped>
 .Pagination {
     display: flex;
+    justify-content: center;
     .arrow {
         display: flex;
         justify-content: center;

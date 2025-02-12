@@ -1,8 +1,12 @@
 import { useCommonStore } from "@/stores/common";
 
 const messages = {
-    sc: {},
-    en: {},
+    sc: {
+        empty_data: "暂无数据",
+    },
+    en: {
+        empty_data: "No data",
+    },
 };
 const locale = useCommonStore().currentLang;
 export default defineI18nConfig(() => {

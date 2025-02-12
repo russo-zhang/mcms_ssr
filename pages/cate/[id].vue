@@ -1,16 +1,19 @@
 <template>
     <div class="cate_detail">
-        <h1>{{ cateDetail[`name_${commonStore.currentLang}`] }}</h1>
-        <ul>
-            <li v-for="(item, index) in newsList" :key="index">
-                <el-card shadow="hover">
-                    <nuxt-link class="title" :to="localePath(`/news/${item.id}`)">
-                        {{ item[`title_${commonStore.currentLang}`] }}
-                    </nuxt-link>
-                    <p class="content">{{ item[`content_${commonStore.currentLang}`] }}</p>
-                </el-card>
-            </li>
-        </ul>
+        <main>
+            <h1>{{ cateDetail[`name_${commonStore.currentLang}`] }}</h1>
+            <ul v-show="newsList.length">
+                <li v-for="(item, index) in newsList" :key="index">
+                    <el-card shadow="hover">
+                        <nuxt-link class="title" :to="localePath(`/news/${item.id}`)">
+                            {{ item[`title_${commonStore.currentLang}`] }}
+                        </nuxt-link>
+                        <p class="content">{{ item[`content_${commonStore.currentLang}`] }}</p>
+                    </el-card>
+                </li>
+            </ul>
+            <el-empty v-show="!newsList.length" :description="$t('empty_data')" />
+        </main>
         <Pagination
             v-model:pageSize="page.pageSize"
             v-model:currentPage="page.currentPage"
@@ -76,6 +79,9 @@ cateDetail.value = cateData.value.data;
     max-width: 1200px;
     padding: 20px;
     margin: 0 auto;
+    main {
+        min-height: calc(100vh - 300px);
+    }
     h1 {
         font-size: 32px;
         font-weight: bold;
