@@ -9,7 +9,7 @@
                     <li
                         v-for="(item, index) in cateList"
                         :key="item.id"
-                        :class="{ active: item.id === commonStore.currentLang }"
+                        :class="{ active: item.id === commonStore.acitveCateId }"
                     >
                         <nuxt-link :to="localePath(`/cate/${item.id}`)">{{
                             item[`name_${commonStore.currentLang}`]
@@ -72,11 +72,14 @@ const selectLang = (lang: string) => {
     setLocale(lang);
 };
 watch(
-    () => route,
-    (val) => {
-        console.log("val:", val);
-        commonStore.acitveCateId = val.split("/")[2];
-    }
+    () => route.path,
+    () => {
+        console.log("route:", route);
+        const cid = Number(route.params.cid) || Number(route.query.cid) || 0;
+        console.log("cid:", cid);
+        commonStore.acitveCateId = typeof cid === "number" ? cid : 0;
+    },
+    { immediate: true }
 );
 </script>
 <style leng="less" scoped>
@@ -109,6 +112,12 @@ watch(
                 border-radius: 4px;
                 transition: background-color 0.3s, color 0.3s;
                 &:hover {
+                    background-color: #555;
+                    color: #ffcc00;
+                }
+            }
+            &.active {
+                a {
                     background-color: #555;
                     color: #ffcc00;
                 }

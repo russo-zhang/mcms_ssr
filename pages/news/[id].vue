@@ -1,7 +1,7 @@
 <template>
     <div class="new_detail">
         <h1>{{ newsDetail[`title_${commonStore.currentLang}`] }}</h1>
-        <p>{{ newsDetail[`content_${commonStore.currentLang}`] }}</p>
+        <article v-html="newsDetail[`content_${commonStore.currentLang}`]"></article>
     </div>
 </template>
 <script lang="ts" setup>

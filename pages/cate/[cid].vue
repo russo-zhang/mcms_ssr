@@ -5,7 +5,7 @@
             <ul v-show="newsList.length">
                 <li v-for="(item, index) in newsList" :key="index">
                     <el-card shadow="hover">
-                        <nuxt-link class="title" :to="localePath(`/news/${item.id}`)">
+                        <nuxt-link class="title" :to="localePath(`/news/${item.id}?cid=${item.cid}`)">
                             {{ item[`title_${commonStore.currentLang}`] }}
                         </nuxt-link>
                         <p class="content">{{ item[`content_${commonStore.currentLang}`] }}</p>
@@ -30,7 +30,7 @@ import Pagination from "@/components/Pagination.vue";
 const route = useRoute();
 const router = useRouter();
 const localePath = useLocalePath();
-if (!route.params.id) {
+if (!route.params.cid) {
     router.push("/cate");
 }
 const commonStore = useCommonStore();
@@ -40,7 +40,7 @@ const page = ref({
     pageSize: 10,
     total: 0,
 });
-const cid = Number(route.params.id) || 0;
+const cid = Number(route.params.cid) || 0;
 const getNewsList = async () => {
     const { data }: any = await useFetch(`/client/news_list`, {
         baseURL,
