@@ -21,6 +21,14 @@ const { data }: any = await useFetch(`/client/news_detail`, {
     },
 });
 newsDetail.value = data.value.data;
+
+useHead({
+    title: newsDetail.value[`title_${commonStore.currentLang}`],
+    meta: [
+        { name: "description", content: newsDetail.value[`description_${commonStore.currentLang}`] },
+        { name: "keywords", content: newsDetail.value[`keyword_${commonStore.currentLang}`] },
+    ],
+});
 </script>
 
 <style lang="less" scoped>
