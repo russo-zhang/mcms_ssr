@@ -45,7 +45,9 @@ useHead({
     p {
         font-size: 16px;
         white-space: pre-wrap;
-        line-height: 24px;
+        line-height: inherit;
+        margin-top: 22px;
+        margin-bottom: 22px;
     }
 }
 </style>
