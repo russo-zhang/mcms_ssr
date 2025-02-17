@@ -42,12 +42,18 @@ useHead({
         text-align: center;
         margin-bottom: 60px;
     }
-    p {
-        font-size: 16px;
-        white-space: pre-wrap;
-        line-height: inherit;
-        margin-top: 22px;
-        margin-bottom: 22px;
+}
+</style>
+<style lang="less">
+.new_detail {
+    article {
+        p {
+            font-size: 16px;
+            white-space: pre-wrap;
+            line-height: inherit;
+            margin-top: 22px;
+            margin-bottom: 22px;
+        }
     }
 }
 </style>
