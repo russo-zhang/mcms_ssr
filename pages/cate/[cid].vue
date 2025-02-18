@@ -5,7 +5,7 @@
             <ul v-show="newsList.length">
                 <li v-for="(item, index) in newsList" :key="index">
                     <el-card shadow="hover">
-                        <nuxt-link class="title" :to="localePath(`/news/${item.id}?cid=${item.cid}`)">
+                        <nuxt-link class="title" :to="localePath(`/article/${item.id}?cid=${item.cid}`)">
                             {{ item[`title_${commonStore.currentLang}`] }}
                         </nuxt-link>
                         <p class="content">{{ item[`content_${commonStore.currentLang}`] }}</p>

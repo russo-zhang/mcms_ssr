@@ -53,9 +53,8 @@
 import { ref } from "vue";
 import { useCommonStore } from "@/stores/common";
 import { baseURL } from "@/env/config";
-import { useRouter, useRoute } from "vue-router";
+import { useRoute } from "vue-router";
 const route = useRoute();
-const router = useRouter();
 const commonStore = useCommonStore();
 commonStore.setLang(route.path.split("/")[1] || "en");
 const localePath = useLocalePath();
@@ -74,9 +73,7 @@ const selectLang = (lang: string) => {
 watch(
     () => route.path,
     () => {
-        console.log("route:", route);
         const cid = Number(route.params.cid) || Number(route.query.cid) || 0;
-        console.log("cid:", cid);
         commonStore.acitveCateId = typeof cid === "number" ? cid : 0;
     },
     { immediate: true }
