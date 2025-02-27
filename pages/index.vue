@@ -2,8 +2,8 @@
     <div class="home">
         <main>
             <h1>{{ $t("all_news") }}</h1>
-            <ul v-show="newsList.length">
-                <li v-for="(item, index) in newsList" :key="index">
+            <ul v-if="newsList.length">
+                <li v-for="item in newsList" :key="item.id">
                     <el-card shadow="hover">
                         <nuxt-link class="title" :to="localePath(`/article/${item.id}?cid=${item.cid}`)">
                             {{ item[`title_${commonStore.currentLang}`] }}
@@ -26,8 +26,10 @@
 import Pagination from "@/components/Pagination.vue";
 import { baseURL } from "@/env/config";
 import { useCommonStore } from "@/stores/common";
+import { useRoute } from "vue-router";
 const localePath = useLocalePath();
 const commonStore = useCommonStore();
+const route = useRoute();
 const page = ref({
     currentPage: 1,
     pageSize: 10,
@@ -39,6 +41,8 @@ const getNewsList = async () => {
         baseURL,
         method: "post",
         body: {
+            title: route.query.title || "",
+            lang: commonStore.currentLang,
             cid: 0,
             limit: page.value.pageSize,
             skip: page.value.currentPage,
@@ -47,6 +51,12 @@ const getNewsList = async () => {
     newsList.value = data.value.data;
 };
 getNewsList();
+watch(
+    () => route.query.title,
+    () => {
+        getNewsList();
+    }
+);
 </script>
 
 <style lang="less" scoped>

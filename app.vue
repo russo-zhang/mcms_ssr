@@ -16,6 +16,13 @@
                         }}</nuxt-link>
                     </li>
                 </ul>
+                <div class="search">
+                    <el-input v-model="searchValue" :placeholder="$t('search_placeholder')" @keyup.enter="search">
+                        <template #append>
+                            <el-button :icon="Search" @click="search" />
+                        </template>
+                    </el-input>
+                </div>
                 <el-dropdown @command="selectLang">
                     <span class="el-dropdown-link">
                         {{ commonStore.currentLangItem.label }}
@@ -53,8 +60,10 @@
 import { ref } from "vue";
 import { useCommonStore } from "@/stores/common";
 import { baseURL } from "@/env/config";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
+import { Search } from "@element-plus/icons-vue";
 const route = useRoute();
+const router = useRouter();
 const commonStore = useCommonStore();
 commonStore.setLang(route.path.split("/")[1] || "en");
 const localePath = useLocalePath();
@@ -70,14 +79,21 @@ const selectLang = (lang: string) => {
     commonStore.currentLang = lang;
     setLocale(lang);
 };
+const searchValue = ref("");
 watch(
     () => route.path,
     () => {
         const cid = Number(route.params.cid) || Number(route.query.cid) || 0;
         commonStore.acitveCateId = typeof cid === "number" ? cid : 0;
+        searchValue.value = String(route.query.title || "");
     },
     { immediate: true }
 );
+const search = () => {
+    if (searchValue.value) {
+        router.push(localePath(`/?title=${searchValue.value}`));
+    }
+};
 </script>
 <style leng="less" scoped>
 .el-header {
@@ -120,6 +136,9 @@ watch(
                 }
             }
         }
+    }
+    .search {
+        margin-right: 20px;
     }
     .el-dropdown {
         color: #fff;

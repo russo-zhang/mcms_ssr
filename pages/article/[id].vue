@@ -17,6 +17,7 @@ const { data }: any = await useFetch(`/client/news_detail`, {
     baseURL,
     method: "post",
     body: {
+        lang: commonStore.currentLang,
         id,
     },
 });

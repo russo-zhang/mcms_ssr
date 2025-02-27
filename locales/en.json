@@ -1,4 +1,5 @@
 {
     "all_news": "All News",
-    "empty_data": "No data"
+    "empty_data": "No data",
+    "search_placeholder": "Please enter a keyword"
 }

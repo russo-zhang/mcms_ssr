@@ -46,6 +46,7 @@ const getNewsList = async () => {
         baseURL,
         method: "post",
         body: {
+            lang: commonStore.currentLang,
             cid,
             limit: page.value.pageSize,
             skip: page.value.currentPage,
@@ -59,6 +60,7 @@ const { data: cateData }: any = await useFetch(`/client/cate_detail`, {
     baseURL,
     method: "post",
     body: {
+        lang: commonStore.currentLang,
         id: cid,
     },
 });
