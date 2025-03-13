@@ -27,6 +27,8 @@ import Pagination from "@/components/Pagination.vue";
 import { baseURL } from "@/env/config";
 import { useCommonStore } from "@/stores/common";
 import { useRoute } from "vue-router";
+import { useI18n } from "vue-i18n";
+const { t } = useI18n();
 const localePath = useLocalePath();
 const commonStore = useCommonStore();
 const route = useRoute();
@@ -57,6 +59,13 @@ watch(
         getNewsList();
     }
 );
+useHead({
+    title: t("all_news"),
+    meta: [
+        { name: "description", content: t("all_news_description") },
+        { name: "keywords", content: t("all_news_keywords") },
+    ],
+});
 </script>
 
 <style lang="less" scoped>

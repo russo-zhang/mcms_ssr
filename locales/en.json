@@ -1,5 +1,7 @@
 {
     "all_news": "All News",
+    "all_news_description": "All news in one place",
+    "all_news_keywords": "news, all news, news in one place",
     "empty_data": "No data",
     "search_placeholder": "Please enter a keyword"
 }
