@@ -1,8 +1,9 @@
 <template>
-    <div class="new_detail">
+    <div v-show="!isEmpty" class="new_detail">
         <h1>{{ newsDetail[`title_${commonStore.currentLang}`] }}</h1>
         <article v-html="newsDetail[`content_${commonStore.currentLang}`]"></article>
     </div>
+    <el-empty v-show="isEmpty" :description="$t('empty_data')" />
 </template>
 <script lang="ts" setup>
 import { ref } from "vue";
@@ -13,6 +14,7 @@ const commonStore = useCommonStore();
 const route = useRoute();
 const newsDetail = ref<any>({});
 const id = Number(route.params.id) || 0;
+const isEmpty = ref(true);
 const { data }: any = await useFetch(`/client/news_detail`, {
     baseURL,
     method: "post",
@@ -21,7 +23,10 @@ const { data }: any = await useFetch(`/client/news_detail`, {
         id,
     },
 });
-newsDetail.value = data.value.data;
+if (data.value && data.value.data) {
+    newsDetail.value = data.value.data || {};
+    isEmpty.value = false;
+}
 
 useHead({
     title: newsDetail.value[`title_${commonStore.currentLang}`],

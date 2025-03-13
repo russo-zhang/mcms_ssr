@@ -53,6 +53,9 @@ const getNewsList = async () => {
         },
     });
     newsList.value = data.value.data;
+    if (data.value && data.value.data) {
+        newsList.value = data.value.data || {};
+    }
 };
 getNewsList();
 const cateDetail = ref<any>({});
@@ -64,7 +67,9 @@ const { data: cateData }: any = await useFetch(`/client/cate_detail`, {
         id: cid,
     },
 });
-cateDetail.value = cateData.value.data;
+if (cateData.value && cateData.value.data) {
+    cateDetail.value = cateData.value.data || {};
+}
 </script>
 
 <style lang="less" scoped>
