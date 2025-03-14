@@ -50,6 +50,7 @@
                         <a href="https://nuxt.com" target="_blank">Nuxt</a> |
                         <a href="https://element-plus.org/zh-CN" target="_blank">Element Plus</a>
                     </p>
+                    <p>客户端渲染画面</p>
                 </div>
             </el-footer>
         </el-container>
