@@ -8,7 +8,7 @@
                         <nuxt-link class="title" :to="localePath(`/article/${item.id}?cid=${item.cid}`)">
                             {{ item[`title_${commonStore.currentLang}`] }}
                         </nuxt-link>
-                        <p class="content">{{ item[`content_${commonStore.currentLang}`] }}</p>
+                        <p class="content">{{ item[`description_${commonStore.currentLang}`] }}</p>
                     </el-card>
                 </li>
             </ul>
@@ -51,6 +51,7 @@ const getNewsList = async () => {
         },
     });
     newsList.value = data.value.data;
+    page.value.total = data.value.total || 0;
 };
 getNewsList();
 watch(

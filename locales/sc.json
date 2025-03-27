@@ -3,5 +3,6 @@
     "all_news_description": "所有新闻一网打尽",
     "all_news_keywords": "新闻, 所有新闻, 所有新闻一网打尽",
     "empty_data": "暂无数据",
-    "search_placeholder": "请输入关键字"
+    "search_placeholder": "请输入关键字",
+    "published_at": "发布于"
 }

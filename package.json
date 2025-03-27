@@ -13,6 +13,7 @@
     "@element-plus/nuxt": "^1.0.10",
     "@nuxtjs/i18n": "^8.5.5",
     "@pinia/nuxt": "^0.5.5",
+    "dayjs": "^1.11.13",
     "element-plus": "^2.8.5",
     "nuxt": "^3.13.0",
     "vue": "latest",
