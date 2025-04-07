@@ -1,6 +1,7 @@
 <template>
     <div v-show="!isEmpty" class="new_detail">
         <el-page-header @back="onBack"> </el-page-header>
+        <!-- HTML标签结合数据 -->
         <h1>{{ newsDetail[`title_${commonStore.currentLang}`] }}</h1>
         <p class="published_at">{{ $t("published_at") }}: {{ timeFormat(newsDetail.created_at) }}</p>
         <el-divider></el-divider>
@@ -20,6 +21,7 @@ const router = useRouter();
 const newsDetail = ref<any>({});
 const id = Number(route.params.id) || 0;
 const isEmpty = ref(true);
+// 从接口获取数据
 const { data }: any = await useFetch(`/client/news_detail`, {
     baseURL,
     method: "post",
@@ -29,10 +31,10 @@ const { data }: any = await useFetch(`/client/news_detail`, {
     },
 });
 if (data.value && data.value.data) {
-    newsDetail.value = data.value.data || {};
+    newsDetail.value = data.value.data || {}; // 将数据赋值给 newsDetail
     isEmpty.value = false;
 }
-
+// 处理时间格式
 const timeFormat = (time: number | string) => {
     if (!time) return "";
     if (typeof time === "number") {
@@ -41,11 +43,21 @@ const timeFormat = (time: number | string) => {
         return dayjs(time).format("YYYY-MM-DD HH:mm:ss");
     }
 };
+// 用于设置页面标题和描述的函数
 useHead({
+    // 设置页面标题
     title: newsDetail.value[`title_${commonStore.currentLang}`],
     meta: [
-        { name: "description", content: newsDetail.value[`description_${commonStore.currentLang}`] },
-        { name: "keywords", content: newsDetail.value[`keyword_${commonStore.currentLang}`] },
+        // 设置页面描述
+        {
+            name: "description",
+            content: newsDetail.value[`description_${commonStore.currentLang}`],
+        },
+        // 设置页面关键词
+        {
+            name: "keywords",
+            content: newsDetail.value[`keyword_${commonStore.currentLang}`],
+        },
     ],
 });
 const onBack = () => {
